@@ -32,9 +32,51 @@ extern Facility stacirna;
 
 extern unsigned int stacirnaObs;
 
+
+// Statistika udaje
+extern unsigned int dobaStatistika;
+// pocet tanku, ktere se povedlo stocit
+unsigned int pocetStocenychTanku = 0;
+
+// kolikrat byl umyty tanky
+unsigned int pocetUmytychTanku = 0;
+
+// nejsou volne tanky (pivo se kvasi), neni co umyvat, nemuzeme varit ani stacet
+unsigned int pocetSmenNemaCoDelat = 0;
+
+// pocet smen pres vsedni dny
+unsigned int pocetSmenNepracDny = 0;
+
+//pocet smen pres nepracovni dny
+unsigned int pocetSmenVikendy = 0;
+
+// pocet 11°
+unsigned int pocet11 = 0;
+
+// pocet 12°
+unsigned int pocet12 = 0;
+
+// pocet 13°
+unsigned int pocet13 = 0;
+
+// pocet 16° piv
+unsigned int pocet16 = 0;
+
+
+// pomocne udaje u statistik
+
+// priznak, ze smena muze varit
+bool muzemeVarit = true;
+
+// priznak, ze smena muze stacet
+bool muzemeStacet = true;
+
+// zapina debugovaci mod
+bool debug = 1;
+
 void info( const char *retezec ) {
    // pokud debugujeme, tak vypisovat, jinak ne
-   if ( 1 ) {
+   if ( debug ) {
       std::cerr << static_cast<int>(Time) << ": " << retezec << std::endl;
    }
 }
@@ -50,8 +92,12 @@ class Staceni: public Process {
          Wait( 6 * HODINA );
          info( "Umyjeme tank." );
          Wait( 4 * HODINA );
+         pocetUmytychTanku++;
          info( "Vracime tank mezi volne." );
          volneTanky++;
+         pocetStocenychTanku++;
+      } else {
+            muzemeStacet = false;
       }
    }
 };
@@ -66,15 +112,19 @@ class Kvaseni: public Process {
       if ( r <= 0.7 ) {
          info( "Kvasime 11°." );
          dobaKvaseni = 30;
+         pocet11++;
       } else if ( r > 0.7 && r <= 0.83 ) {
          info( "Kvasime 12°." );
          dobaKvaseni = 45;
+         pocet12++;
       } else if ( r > 0.83 && r <= 0.93 ) {
          info( "Kvasime 13°." );
          dobaKvaseni = 60;
+         pocet13++;
       } else {
          info( "Kvasime 16°." );
          dobaKvaseni = 90;
+         pocet16++;
       }
       Wait( dobaKvaseni * DEN );
       tankyKeStaceni++; 
@@ -100,6 +150,9 @@ class Vareni: public Process {
             volneTanky--;
             varekOdCisteni++;
             rozdelanyTank = true;
+         } else {
+             muzemeVarit = false;
+
          }
       }
    }
@@ -113,24 +166,84 @@ class Tyden: public Process {
       // tento proces bezi porad dokola
       while ( 1 ) {
          if ( denVTydnu < 6 ) {
-            info( "Prisla denni smena na staceni a vareni." );
+             if ( denVTydnu == 1 ){
+                 info( "Novy tyden" );
+             }
+             info( "Prisla denni smena na staceni a vareni." );
+
+             pocetSmenNepracDny++;
+             muzemeStacet = true;
+             muzemeVarit = true;
             ( new Vareni )->Activate();
             ( new Staceni )->Activate();
             Wait( 12 * HODINA );
+            if ( ! muzemeVarit && ! muzemeStacet ){
+                pocetSmenNemaCoDelat++;
+            }
+
             info( "Prisla nocni smena na vareni." );
+             muzemeStacet = true;
+             muzemeVarit = true;
+             pocetSmenNepracDny++;
             ( new Vareni )->Activate();
             Wait( 12 * HODINA );
-            denVTydnu++;
+            if ( ! muzemeVarit && ! muzemeStacet ){
+                 pocetSmenNemaCoDelat++;
+             }
+             denVTydnu++;
+
          } else {
             info( "Prisla sobotni smena na vareni." );
+             pocetSmenVikendy++;
+             muzemeVarit = true;
             ( new Vareni )->Activate();
             Wait( DEN );
+            if ( !muzemeVarit ){
+                pocetSmenNemaCoDelat++;
+            }
             denVTydnu++;
             info( "Prisla nedelni smena na vareni." );
+             pocetSmenVikendy++;
+             muzemeVarit = true;
             ( new Vareni )->Activate();
             Wait( DEN );
+             if ( !muzemeVarit ){
+                 pocetSmenNemaCoDelat++;
+             }
             denVTydnu = 1;
          }
       }
    }
+};
+
+
+/**
+ * Proces, ktery generuje statistiky standartni vystup. Vystup tohoto procesu lze pouzit
+ * na generovani grafu.
+ */
+class Statistika: public Process {
+    void Behavior() {
+        std::cout << "Cas,Pocet smen,Pocet smen nema co delat, Pocet stocenych tanku,Pocet tanku 11° piva,Pocet tanku 12° piva, Pocet tanku 13° piva,Pocet tanku 16° piva" << std::endl;
+        //int unsigned pocitadlo = 0;
+        while (1) {
+            std::cout << static_cast<int>(Time) << ",";
+            std::cout << pocetSmenNepracDny + pocetSmenVikendy << ",";
+            std::cout << pocetSmenNemaCoDelat << ",";
+            std::cout << pocetStocenychTanku << ",";
+            std::cout << pocet11 << ",";
+            std::cout << pocet12 << ",";
+            std::cout << pocet13 << ",";
+            std::cout << pocet16 << std::endl;
+            //dobaStatistika++;
+
+            //pocetSmenNemaCoDelat    = 0;
+            //pocetStocenychTanku     = 0;
+            //pocet11 = 0;
+            //pocet12 = 0;
+            //pocet13 = 0;
+            //pocet16 = 0;
+
+            Wait( dobaStatistika );
+        }
+    }
 };

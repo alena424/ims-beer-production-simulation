@@ -22,6 +22,8 @@ bool rozdelanyTank = false;
 
 unsigned int tankyKeStaceni = 0;
 
+unsigned int dobaStatistika = 7 * DEN;
+
 int main() {
 
    unsigned celkovaDoba = 365 * DEN;
@@ -29,6 +31,7 @@ int main() {
    info( "Zacatek simulace" );
    Init( 0, celkovaDoba );
    ( new Tyden )->Activate();
+   ( new Statistika )->Activate( );
    Run();
    info( "Konec simulace" );
    return 0;
