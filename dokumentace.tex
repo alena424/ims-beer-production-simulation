@@ -1,0 +1,92 @@
+% 1. projekt do Počítačové komunikace a sítě
+% Jan Šorm (xsormj00), 2018
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fancyvrb}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{picture}
+\usepackage[left=2cm,right=2cm,top=2.5cm,bottom=2cm]{geometry}
+\author{Jan Šorm}
+\begin{document}
+\pagestyle{headings}
+%%%%%%%%%%%%%%------------Titulni strana------------%%%%%%%%%%%%%%
+\begin{titlepage}
+	\begin{center}
+		{\Huge\textsc{Vysoké učení technické v~Brně}}\\
+		\medskip
+		{\huge\textsc{Fakulta informačních technologií}}\\
+		\vspace{\stretch{0.382}}
+		{\LARGE Modelování a simulace}\\
+		\medskip
+		{\Huge Zadání č. 6 - Výroba piva}\\
+		\vspace{\stretch{0.618}}
+	\end{center}
+	{\Large\today \hfill Šorm Jan, Tesařová Alena}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Úvod}
+Tato technická zpráva vznikla jako součást projektu do předmětu Modelování a simulace na škole Vysoké učení technické v Brně. V této zprávě je popsán simulační model \cite[str. 7]{pred} výroby piva ve společnosti Brněnská pivovarnická společnost s.r.o. \cite{pivo}. Důležitou součástí této zprávy jsou pak simulační experimenty, které slouží ke zjištění, zda nelze dosáhnout zefektivnění výroby.
+
+\subsection{Autoři a zdroje informací}
+Autory projektu jsou Jan Šorm a Alena Tesařová. Informace jsou čerpány z exkurze v pivovaru, které se zúčastnili oba autoři, osobního rozhovoru s panem Petrem Hauskrechtem po exkurzi a pozdější e-mailové korespondence se společností.
+
+\subsection{Ověření validity modelu}
+Většina našich informací pochází přímo od pana Hauskrechta, který je spoluvlastníkem společnosti a zároveň i dlouholetý sládek, takže by celý výrobní proces se všemi parametry měl být velmi přesný. Samotné výsledky našeho experimentu ohledně roční výroby, pak souhlasili s údaji, které nám sdělil pan Hauskrecht.
+
+	
+\section{Rozbor tématu a použitých metod}
+Tématem práce je simulace \cite[str. 8]{pred} výroby piva ve společnosti Brněnská pivovarnická společnost s.r.o. Pro výrobu piva jsou potřeba 4 základní ingredience: slad, voda, chmel a pivovarské kvasnice, které má pivovar vždy k dispozici. Výroba piva pak probíhá po várkách, kde z jedné várky se vyrobí 20 hl piva. Během jedné dvanáctihodinové směny pak proběhne pro jednu várku vystírání, rmutování, scezování, chmelovar a zchlazování a várka se přesune do kvasného tanku, kde začne probíhat několikadenní kvašení, než je tank připraven ke stáčení.
+
+Kvasných tanků je celkem 23 o kapacitě 48 hl, takže do každého tanku se vlezou dvě várky a zbývající prostor je využit na pěnu. Jelikož je v tanku místo na dvě várky, tak se vždy vaří po sobě dvě várky stejného druhu piva. 
+
+V pivovaru se vyrábí celkem 4 různé druhy piva. Každý druh se kvasí jinak dlouho a také tvoří jinačí procentuální zastoupení v celkové výrobě:
+\begin{itemize}
+  \item 10$^\circ$ -- 30 dní kvašení -- 13 \% celkové výroby
+  \item 11$^\circ$ -- 35 dní kvašení -- 70 \% celkové výroby
+  \item 12$^\circ$ -- 45 dní kvašení -- 10 \% celkové výroby
+  \item 16$^\circ$ -- 90 dní kvašení -- 7 \% celkové výroby
+\end{itemize}
+
+Po skončení kvašení je celý tank připraven ke stáčení. Jeden tank se stáčí 6 hodin a další 4 hodiny se pak čistí než je použitelný pro další naplnění. Nová várka se začne dělat jen v případě, že existuje alespoň jeden čistý kvasný tank nebo tank, do kterého lze doplnit ještě jednu várku.
+
+Směny na vaření jsou každý všední den dvě, v sobotu probíhá pouze denní a v neděli probíhá povinné čištění tanků na vaření. Směny na stáčení pak jsou jednou každý všední den.
+
+
+
+\subsection{Použité postupy}
+
+
+\subsection{Původ použitých postupů}
+
+
+\section{Koncepce modelu}
+
+
+\section{Architektura simulačního modelu}
+
+
+\section{Podstata simulačních experimentů a jejich průběh}
+
+   
+\section{Shrnutí simulačních experimentů a závěr}
+
+   
+\newpage
+\begin{thebibliography}{Per00}
+	\bibitem[1]{pred} Peringer P., Hrubý M.:
+    \emph{Modelování a simulace [online]. [vid. 5. prosince 2018]. Dostupné z: https://www.fit.vutbr.cz/study/courses/IMS/public/prednasky/IMS.pdf }
+	\bibitem[2]{simlib} Peringer P.:
+    \emph{SIMLIB/C++ [online]. [vid. 5. prosince 2018]. Dostupné z: http://www.fit.vutbr.cz/\~{}peringer/SIMLIB/ }
+	\bibitem[3]{pivo} \emph{Brněnská pivovarnická společnost s.r.o. [online]. [vid. 5. prosince 2018]. Dostupné z: https://www.hauskrecht.cz/ }
+\end{thebibliography}
+	
+\end{document}
