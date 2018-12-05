@@ -111,18 +111,18 @@ class Kvaseni: public Process {
       int dobaKvaseni;
       if ( r <= 0.7 ) {
          info( "Kvasime 11°." );
-         dobaKvaseni = 30;
+         dobaKvaseni = 35;
          pocet11++;
-      } else if ( r > 0.7 && r <= 0.83 ) {
+      } else if ( r > 0.7 && r <= 0.86 ) {
          info( "Kvasime 12°." );
          dobaKvaseni = 45;
          pocet12++;
-      } else if ( r > 0.83 && r <= 0.93 ) {
-         info( "Kvasime 13°." );
-         dobaKvaseni = 60;
+      } else if ( r > 0.86 && r <= 0.93 ) {
+         info( "Kvasime 10°." );
+         dobaKvaseni = 30;
          pocet13++;
       } else {
-         info( "Kvasime 16°." );
+         info( "Kvasime specialy." );
          dobaKvaseni = 90;
          pocet16++;
       }
@@ -223,7 +223,7 @@ class Tyden: public Process {
  */
 class Statistika: public Process {
     void Behavior() {
-        std::cout << "Cas,Pocet smen,Pocet smen nema co delat, Pocet stocenych tanku,Pocet tanku 11° piva,Pocet tanku 12° piva, Pocet tanku 13° piva,Pocet tanku 16° piva" << std::endl;
+        std::cout << "Cas,Pocet smen celkem,Pocet smen nemajici co delat, Pocet stocenych tanku celkem,Pocet tanku 11° piva,Pocet tanku 12° piva, Pocet tanku 10° piva,Pocet tanku specialu" << std::endl;
         //int unsigned pocitadlo = 0;
         while (1) {
             std::cout << static_cast<int>(Time) << ",";
