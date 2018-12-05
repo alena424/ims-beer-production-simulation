@@ -56,11 +56,11 @@ unsigned int pocet11 = 0;
 // pocet 12°
 unsigned int pocet12 = 0;
 
-// pocet 13°
-unsigned int pocet13 = 0;
+// pocet 10°
+unsigned int pocet10 = 0;
 
-// pocet 16° piv
-unsigned int pocet16 = 0;
+// pocet specialu 
+unsigned int pocetSpec = 0;
 
 
 // pomocne udaje u statistik
@@ -111,20 +111,20 @@ class Kvaseni: public Process {
       int dobaKvaseni;
       if ( r <= 0.7 ) {
          info( "Kvasime 11°." );
-         dobaKvaseni = 35;
+         dobaKvaseni = 40;
          pocet11++;
       } else if ( r > 0.7 && r <= 0.86 ) {
          info( "Kvasime 12°." );
-         dobaKvaseni = 45;
+         dobaKvaseni = 50;
          pocet12++;
       } else if ( r > 0.86 && r <= 0.93 ) {
          info( "Kvasime 10°." );
          dobaKvaseni = 30;
-         pocet13++;
+         pocet10++;
       } else {
          info( "Kvasime specialy." );
          dobaKvaseni = 90;
-         pocet16++;
+         pocetSpec++;
       }
       Wait( dobaKvaseni * DEN );
       tankyKeStaceni++; 
@@ -177,17 +177,20 @@ class Tyden: public Process {
             ( new Vareni )->Activate();
             ( new Staceni )->Activate();
             Wait( 12 * HODINA );
-            if ( ! muzemeVarit && ! muzemeStacet ){
+            if ( ! muzemeVarit   ){
                 pocetSmenNemaCoDelat++;
+            }
+            if ( ! muzemeStacet){
+               pocetSmenNemaCoDelat++;
             }
 
             info( "Prisla nocni smena na vareni." );
-             muzemeStacet = true;
+
              muzemeVarit = true;
              pocetSmenNepracDny++;
             ( new Vareni )->Activate();
             Wait( 12 * HODINA );
-            if ( ! muzemeVarit && ! muzemeStacet ){
+            if ( ! muzemeVarit ){
                  pocetSmenNemaCoDelat++;
              }
              denVTydnu++;
@@ -232,16 +235,19 @@ class Statistika: public Process {
             std::cout << pocetStocenychTanku << ",";
             std::cout << pocet11 << ",";
             std::cout << pocet12 << ",";
-            std::cout << pocet13 << ",";
-            std::cout << pocet16 << std::endl;
+            std::cout << pocet10 << ",";
+            std::cout << pocetSpec << std::endl;
             //dobaStatistika++;
 
-            //pocetSmenNemaCoDelat    = 0;
-            //pocetStocenychTanku     = 0;
-            //pocet11 = 0;
-            //pocet12 = 0;
-            //pocet13 = 0;
-            //pocet16 = 0;
+            pocetSmenNemaCoDelat    = 0;
+            pocetStocenychTanku     = 0;
+            pocet11 = 0;
+            pocet12 = 0;
+            pocet10 = 0;
+            pocetSpec = 0;
+            
+            pocetSmenNepracDny = 0;
+            pocetSmenVikendy = 0;
 
             Wait( dobaStatistika );
         }

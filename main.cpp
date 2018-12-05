@@ -15,6 +15,7 @@ unsigned int stacirnaObs = 1;
 unsigned int denVTydnu = 1;
 // zaciname s 23 volnymi tanky
 unsigned int volneTanky = 23;
+
 // zaciname s nulovym poctem varek od posledniho cisteni
 unsigned int varekOdCisteni = 0;
 // na zacatku neni zadny tank rozdelany
@@ -22,11 +23,11 @@ bool rozdelanyTank = false;
 
 unsigned int tankyKeStaceni = 0;
 
-unsigned int dobaStatistika = 7 * DEN;
+unsigned int dobaStatistika = 365 * DEN;
 
 int main() {
 
-   unsigned celkovaDoba = 365 * DEN;
+   unsigned celkovaDoba = 365 * DEN * 10;
 
    info( "Zacatek simulace" );
    Init( 0, celkovaDoba );
