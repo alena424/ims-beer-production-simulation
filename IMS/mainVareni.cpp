@@ -28,7 +28,10 @@ int main() {
 
    unsigned celkovaDoba = 10 * 365 * DEN;
 
+   std::cout << "Tanku,Pocet smen celkem,Pocet varicich smen nemajici co delat, Pocet stacicich smen nemajici co delat, Pocet stocenych tanku celkem,Pocet tanku 10° piva,Pocet tanku 11° piva, Pocet tanku 12° piva,Pocet tanku specialu" << std::endl;
+
    for ( int i = 23; i < 60; i++ ) {
+      std::cout << i << "," ;
       tankyKeStaceni = 0;
       rozdelanyTank = false;
       varekOdCisteni = 0;

@@ -14,7 +14,7 @@ unsigned int stacirnaObs = 1;
 // zaciname modelovat od pondelni denni smeny
 unsigned int denVTydnu = 1;
 // zaciname s 23 volnymi tanky
-unsigned int volneTanky = 38;
+unsigned int volneTanky = 23;
 // zaciname s nulovym poctem varek od posledniho cisteni
 unsigned int varekOdCisteni = 0;
 // na zacatku neni zadny tank rozdelany
@@ -22,7 +22,7 @@ bool rozdelanyTank = false;
 
 unsigned int tankyKeStaceni = 0;
 
-unsigned int dobaStatistika = 7 * DEN;
+unsigned int dobaStatistika = 365 * DEN;
 
 int main() {
 

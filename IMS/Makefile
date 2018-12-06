@@ -4,7 +4,7 @@ FLAGS	= -std=c++11 -Wall -Wextra -Werror -g -pedantic -O2
 
 .PHONY: clean build experiments run archive
 
-build:	brewery brewery2 brewery3 brewery4 brewery5
+build:	brewery pridameTanky staceniVikend vareniVikend brewery5
 
 brewery: main.o
 	$(CC) $(FLAGS) -o $@ $^ -l simlib
@@ -12,19 +12,19 @@ brewery: main.o
 main.o: main.cpp main.hpp
 	$(CC) $(FLAGS) -c $<
 
-brewery2: mainTanky.o
+pridameTanky: mainTanky.o
 	$(CC) $(FLAGS) -o $@ $^ -l simlib
 
 mainTanky.o: mainTanky.cpp mainTanky.hpp
 	$(CC) $(FLAGS) -c $<
 
-brewery3: mainSmeny.o
+staceniVikend: mainSmeny.o
 	$(CC) $(FLAGS) -o $@ $^ -l simlib
 
 mainSmeny.o: mainSmeny.cpp mainSmeny.hpp
 	$(CC) $(FLAGS) -c $<
 
-brewery4: mainVareni.o
+vareniVikend: mainVareni.o
 	$(CC) $(FLAGS) -o $@ $^ -l simlib
 
 mainVareni.o: mainVareni.cpp mainVareni.hpp
@@ -38,4 +38,4 @@ mainPomer.o: mainPomer.cpp mainPomer.hpp
 
 
 clean:
-	rm -f main.o brewery main.o brewery2 mainTanky.o brewery3 mainSmeny.o brewery4 mainVareni.o brewery5 mainPomer.o
+	rm -f main.o brewery main.o pridameTanky mainTanky.o staceniVikend mainSmeny.o vareniVikend mainVareni.o brewery5 mainPomer.o

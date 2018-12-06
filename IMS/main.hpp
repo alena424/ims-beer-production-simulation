@@ -43,6 +43,8 @@ unsigned int pocetUmytychTanku = 0;
 // nejsou volne tanky (pivo se kvasi), neni co umyvat, nemuzeme varit ani stacet
 unsigned int pocetSmenNemaCoDelat = 0;
 
+unsigned int pocetStacSmenNemaCoDelat = 0;
+
 // pocet smen pres vsedni dny
 unsigned int pocetSmenNepracDny = 0;
 
@@ -177,7 +179,7 @@ class Tyden: public Process {
                pocetSmenNemaCoDelat++;
             }
             if ( ! muzemeStacet ) {
-               pocetSmenNemaCoDelat++;
+               pocetStacSmenNemaCoDelat++;
             }
 
             info( "Prisla nocni smena na vareni." );
@@ -222,19 +224,45 @@ class Tyden: public Process {
  */
 class Statistika: public Process {
    void Behavior() {
-      std::cout << "Cas,Pocet smen celkem,Pocet smen nemajici co delat, Pocet stocenych tanku celkem,Pocet tanku 10° piva,Pocet tanku 11° piva, Pocet tanku 12° piva,Pocet tanku specialu" << std::endl;
+      std::cout << "Cas,Pocet smen celkem,Pocet varicich smen nemajici co delat, Pocet stacicich smen nemajici co delat, Pocet stocenych tanku celkem,Pocet tanku 10° piva,Pocet tanku 11° piva, Pocet tanku 12° piva,Pocet tanku specialu" << std::endl;
       while (1) {
+//         Wait( dobaStatistika / 7 * 365 * 10  );
          std::cout << static_cast<int>(Time) << ",";
          std::cout << pocetSmenNepracDny + pocetSmenVikendy << ",";
          std::cout << pocetSmenNemaCoDelat << ",";
+         std::cout << pocetStacSmenNemaCoDelat << ",";
          std::cout << pocetStocenychTanku << ",";
          std::cout << pocet10 << ",";
          std::cout << pocet11 << ",";
          std::cout << pocet12 << ",";
          std::cout << pocet16 << std::endl;
+         
+         pocetSmenNepracDny = 0;
+         pocetSmenVikendy = 0;
+         pocetSmenNemaCoDelat = 0;
+         pocetStacSmenNemaCoDelat = 0;
+         pocetStocenychTanku = 0;
+         pocet10 = 0;
+         pocet11 = 0;
+         pocet12 = 0;
+         pocet16 = 0;
 
          Wait( dobaStatistika );
       }
+   }
+};
+
+class ClearStat: public Process {
+   void Behavior() {
+      pocetSmenNepracDny = 0;
+      pocetSmenVikendy = 0;
+      pocetSmenNemaCoDelat = 0;
+      pocetStacSmenNemaCoDelat = 0;
+      pocetStocenychTanku = 0;
+      pocet10 = 0;
+      pocet11 = 0;
+      pocet12 = 0;
+      pocet16 = 0;
    }
 };
 

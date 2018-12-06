@@ -227,7 +227,7 @@ class Statistika: public Process {
 //      std::cout << "Cas,Pocet smen celkem,Pocet smen nemajici co delat, Pocet stocenych tanku celkem,Pocet tanku 10° piva,Pocet tanku 11° piva, Pocet tanku 12° piva,Pocet tanku specialu" << std::endl;
   //    while (1) {
 //         Wait( dobaStatistika / 7 * 365 * 10  );
-         std::cout << static_cast<int>(Time) << ",";
+        // std::cout << static_cast<int>(Time) << ",";
          std::cout << pocetSmenNepracDny + pocetSmenVikendy << ",";
          std::cout << pocetSmenNemaCoDelat << ",";
          std::cout << pocetStacSmenNemaCoDelat << ",";
