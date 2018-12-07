@@ -46,7 +46,16 @@ Většina našich informací pochází přímo od pana Hauskrechta, který je sp
 \section{Rozbor tématu a použitých metod}
 Tématem práce je simulace \cite[str. 8]{pred} výroby piva ve společnosti Brněnská pivovarnická společnost s.r.o. Pro výrobu piva jsou potřeba 4 základní ingredience: slad, voda, chmel a pivovarské kvasnice, které má pivovar vždy k dispozici. Výroba piva pak probíhá po várkách, kde z jedné várky se vyrobí 20 hl piva. Během jedné dvanáctihodinové směny pak proběhne pro jednu várku vystírání, rmutování, scezování, chmelovar a zchlazování a várka se přesune do kvasného tanku, kde začne probíhat několikadenní kvašení, než je tank připraven ke stáčení.
 
-Kvasných tanků je celkem 23 o kapacitě 48 hl, takže do každého tanku se vlezou dvě várky a zbývající prostor je využit na pěnu. Jelikož je v tanku místo na dvě várky, tak se vždy vaří po sobě dvě várky stejného druhu piva. 
+Rmutování
+Při varném procesu dochází k rozšrotování sladu a smíchání s vodou, směs je ve varné nádobě a zahřeje se na teplotu 40-50 stupňů. Následně dochází ke rmutovacímu procesu, kdy proběhne rozštěpení škrobu na jednoduché cukry pomocí enzymům obsažených ve sladu. Používá se tzv. dvourmutový způsob rmutování, aby pivo dostalo svoji zlatavou barvu.
+
+Scezení
+Od odrmutování se musí oddělit sladina od nerozpustných součástí sladového mláta.
+
+Chmelovar
+Po skončení probíhá chmelovar, tzn. že se sladina vaří s přídavkem chmele, čímž se získá mladina. Mladina se zchladí na zákvasnou teplotu a čerpá se to kvasných tanků. 
+
+Kvašení probíhá bez přístupu vzduchu, který by sebou nesl kvasinky, plísně, pyl a prachové částice a infikovat kvasící pivo. Kvasných tanků je celkem 23 o kapacitě 48 hl, takže do každého tanku se vlezou dvě várky a zbývající prostor je využit na pěnu. Jelikož je v tanku místo na dvě várky, tak se vždy vaří po sobě dvě várky stejného druhu piva. 
 
 V pivovaru se vyrábí celkem 4 různé druhy piva. Každý druh se kvasí jinak dlouho a také tvoří jinačí procentuální zastoupení v celkové výrobě:
 \begin{itemize}
@@ -56,19 +65,30 @@ V pivovaru se vyrábí celkem 4 různé druhy piva. Každý druh se kvasí jinak
   \item 16$^\circ$ -- 90 dní kvašení -- 7 \% celkové výroby
 \end{itemize}
 
-Po skončení kvašení je celý tank připraven ke stáčení. Jeden tank se stáčí 6 hodin a další 4 hodiny se pak čistí než je použitelný pro další naplnění. Nová várka se začne dělat jen v případě, že existuje alespoň jeden čistý kvasný tank nebo tank, do kterého lze doplnit ještě jednu várku.
+Po skončení kvašení je celý tank připraven ke stáčení. 
+
+Stáčení do sudů probíhá od pondělí do pátku denně a obsluhuje ho jedna směna. Stáčí se do sudů a z nich se následně stáčí do lahví a sklenic (celý proces trvá zhruba 6 hodin). Po každém vyprázdnění tanku je potřeba tank umýt, tento proces trvá 4 hodiny než je použitelný pro další plnění. Nová várka se začne dělat jen v případě, že existuje alespoň jeden čistý kvasný tank nebo tank, do kterého lze doplnit ještě jednu várku.
 
 Směny na vaření jsou každý všední den dvě, v sobotu probíhá pouze denní a v neděli probíhá povinné čištění tanků na vaření. Směny na stáčení pak jsou jednou každý všední den.
 
 
 
 \subsection{Použité postupy}
-
+Pro tvorbu simulačního projektu byl použit jazyk C++ s knihovnou SIMLIB. 
 
 \subsection{Původ použitých postupů}
 
 
 \section{Koncepce modelu}
+Cílem projektu je simulovat proces výroby piva a navrhnutí efektivnějšího systému výroby. Simulace se nezaměřuje na celý proces zpracování, ale pouze na část, kde se pivo vaří, leží v kvasých tancích a stáčí se.
+
+V seznamu doby kvašení [1] si můžeme povšimnout, že doba kvašení není kratší než jeden měsíc. Zároveň pivovar disponuje pouze 23 tanky. Směny chodí do práce každý den včetně víkendů. Pokud se zamyslíme více nad údaji, uvědomíme si, že za nějakou doby dojdou volné tanky a směny budou muset čekat než uběhne daná doba a tím pádem budou směny nevyužité. 
+
+Při modelování jsme postupovali nejprve tak, že jsme vytvořili abstrakní model, reprezentovaný stochaistickou Petriho sítí [viz obrázek XXX], na základě informací v kapitole [XYY].
+
+%%% popis petriho site %%
+V modelu máme jedinou linku s 23 tanky (na začátku uvažujeme, že jsou tanky prázdné). Do tanku se vejdou 2 uvařené várky, které vaří buď denní nebo noční směny. Po naplnění tanku probíhá kvašení po dobu, která je závislá na druhu piva. Po uplynutí dané doby je tank připrav k stáčení. Stáčení trvá 6 hodin. Po každém vyprázdění tanku musí dojít k jeho čištění. Po každé desáté uvařené várce se musí tanky pořádně umýt, což trvá jednu celou směnu. Spodní část modelu značí příchod a odchod směn ze systému. Směny na vaření jsou každý pracovní den denní a noční. Víkendové směny jsou pouze ranní na vaření.
+
 
 
 \section{Architektura simulačního modelu}
