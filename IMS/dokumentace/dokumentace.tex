@@ -88,16 +88,16 @@ Pro tvorbu simulačního projektu byl použit jazyk C++ s knihovnou SIMLIB. Krom
 \section{Koncepce modelu}
 
 \subsection{Zjednodušený model}
-Cílem projektu bylo simulovat proces výroby piva a navrhnutí efektivnějšího systému výroby. Simulace se nezaměřuje na celý proces zpracování, ale pouze na část, kde se pivo vaří, leží v kvasých tancích a stáčí se. Vaření piva bude pro nás znamenat dobu, kdy dochází rmutování, scezení a chmelovaru pro jednoduchost.
+Cílem projektu bylo simulovat proces výroby piva a navrhnutí efektivnějšího systému výroby. Simulace se nezaměřuje na celý proces zpracování, ale pouze na část, kde se pivo vaří, leží v kvasných tancích a stáčí se. Vaření piva bude pro nás znamenat dobu, kdy dochází rmutování, scezení a chmelovaru pro jednoduchost.
 
 \subsection{Odůvodnění vybrané části modelování}
-V seznamu doby kvašení [\ref{kvaseni}] si je uvedené, že doba kvašení není kratší než jeden měsíc. Zároveň pivovar disponuje pouze 23 tanky. Směny chodí do práce každý den včetně víkendů. Z těchto údajů plyne, že za nějakou dobu dojdou volné tanky a směny budou muset čekat než uběhne daná doba a tím pádem budou směny nevyužité. Tato myšlenka vedla k tomu, že jsme se zaměřili na zmíněnou část výroby.
+V seznamu doby kvašení [\ref{kvaseni}] je uvedené, že doba kvašení není kratší než jeden měsíc. Zároveň pivovar disponuje pouze 23 tanky. Směny chodí do práce každý den včetně víkendů. Z těchto údajů plyne, že za nějakou dobu dojdou volné tanky a směny budou muset čekat než uběhne daná doba a tím pádem budou směny nevyužité. Tato myšlenka vedla k tomu, že jsme se zaměřili na zmíněnou část výroby.
 
 \subsection{Popis konceptu}
-Při modelování jsme postupovali nejprve tak, že jsme vytvořili abstrakní model, reprezentovaný stochaistickou Petriho sítí [obr. \ref{fig:petri}], na základě informací v kapitole [\ref{sec:rozbor}].
+Při modelování jsme postupovali nejprve tak, že jsme vytvořili abstraktní model, reprezentovaný stochastickou Petriho sítí [obr. \ref{fig:petri}], na základě informací v kapitole [\ref{sec:rozbor}].
 
 %%% popis petriho site %%
-V modelu máme jedinou linku s 23 tanky (na začátku uvažujeme, že jsou tanky prázdné). Do tanku se vejdou 2 uvařené várky, které vaří buď denní nebo noční směny (jedna směna uvaří jednu várku). Po naplnění tanku probíhá kvašení po dobu, která je závislá na druhu piva. Po uplynutí dané doby je tank připraven ke stáčení. Stáčení trvá 6 hodin. Po každém vyprázdění tanku musí dojít k jeho čištění. Čištění ejdnoho tanku trvá 4 hodiny. Po každé desáté uvařené várce se musí tanky pořádně umýt, což trvá jednu celou směnu. Spodní část modelu značí příchod a odchod směn ze systému. Směny na vaření jsou každý pracovní den denní a noční. Víkendové směny jsou pouze ranní na vaření.
+V modelu máme jedinou linku s 23 tanky (na začátku uvažujeme, že jsou tanky prázdné). Do tanku se vejdou 2 uvařené várky, které vaří buď denní nebo noční směny (jedna směna uvaří jednu várku). Po naplnění tanku probíhá kvašení po dobu, která je závislá na druhu piva. Po uplynutí dané doby je tank připraven ke stáčení. Stáčení trvá 6 hodin. Po každém vyprázdnění tanku musí dojít k jeho čištění. Čištění jednoho tanku trvá 4 hodiny. Po každé desáté uvařené várce se musí tanky pořádně umýt, což trvá jednu celou směnu. Spodní část modelu značí příchod a odchod směn ze systému. Směny na vaření jsou každý pracovní den denní a noční. Víkendové směny jsou pouze ranní na vaření.
 
 \begin{figure}[H]
   \centering
@@ -119,7 +119,7 @@ V prvním experimentu, který reprezentuje současný provoz pivovaru v průběh
 \subsubsection{Experiment 1}
 V tomto experimentu je sledováno výchozí chování simulovaného modelu. Z naměřených hodnot v tomto experimentu bylo také potvrzeno, že simulace se chová věrohodně.
 
-V tabulce \ref{tab:exp1} lze vidět data získáná ze simulace. Je v nich vidět první záběhový rok, v kterém je stočeno menší množství piva a směny bez práce se také liší od ostatních let. To je dáno tím, že na začátku jsou všechny kvasné tanky prázdné, první měsíc není tedy, co stáčet (tzn. zvýšené množství stáčecích směn bez práce a menší celkové množství stočeného piva) a naopak je pro každou vařící směnu volný tank k dispozici (tzn. snížený počet vařících směn bez práce).
+V tabulce \ref{tab:exp1} lze vidět data získaná ze simulace. Je v nich vidět první záběhový rok, v kterém je stočeno menší množství piva a směny bez práce se také liší od ostatních let. To je dáno tím, že na začátku jsou všechny kvasné tanky prázdné, první měsíc není tedy, co stáčet (tzn. zvýšené množství stáčecích směn bez práce a menší celkové množství stočeného piva) a naopak je pro každou vařící směnu volný tank k dispozici (tzn. snížený počet vařících směn bez práce).
 
 Celkově pak jde vidět z naměřených dat, že se množství stočeného piva pohybuje každý rok okolo 7000 hl piva, což odpovídá zjištěné hodnotě v kapitole \ref{sec:rozbor}. Dále je také vidět velmi vysoký počet směn bez práce.
 \begin{table}[h]
@@ -147,7 +147,7 @@ Celkově pak jde vidět z naměřených dat, že se množství stočeného piva 
 \subsubsection{Experiment 2}
 Tento experiment má za cíl zjistit, kolik je zapotřebí dokoupit kvasných tanků, abychom při zachování ostatních podmínek dosáhli největšího množství stočeného piva za deset let.
 
-Z grafu \ref{fig:exp2tanky} vidíme, že optimální počet tanků je v tomto případě 37 (je tedy třeba dokoupit 14 kvasných tanků), při kterém se dosáhne množství 2571 stočených tanků za 10 let, což znamená 102 840 hl stočeného piva za deset let. Oproti výchozímu stavu (experiment 1) tedy dojde k navýšen výroby o 47 \%. Přidání dalšího tanku už pak nemá žádný efekt, což je vidět i v grafu \ref{fig:exp2smeny}, kde při 37 tancích klesne počet směn na stáčení, které jsou bez práce, na minimum.
+Z grafu \ref{fig:exp2tanky} vidíme, že optimální počet tanků je v tomto případě 37 (je tedy třeba dokoupit 14 kvasných tanků), při kterém se dosáhne množství 2571 stočených tanků za 10 let, což znamená 102 840 hl stočeného piva za deset let. Oproti výchozímu stavu (experiment 1) tedy dojde k navýšení výroby o 47 \%. Přidání dalšího tanku už pak nemá žádný efekt, což je vidět i v grafu \ref{fig:exp2smeny}, kde při 37 tancích klesne počet směn na stáčení, které jsou bez práce, na minimum.
 \begin{figure}[H]
   \centering
   \includegraphics[width=15cm]{exp2tanky.png}
